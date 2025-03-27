@@ -16,7 +16,7 @@ import random
 from useful_functions import *
 
 
-base_path = os.getcwd()[:os.getcwd().find("Hangbird")]
+base_path = os.getcwd()
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -24,12 +24,12 @@ game_display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 pygame.display.set_caption("Hangbird")
 Icon = pygame.image.load(
-    base_path + r"Hangbird_Game\sprites\hangman phases\phase 6.png"
+    base_path + r"\sprites\hangman phases\phase 6.png"
 )
 pygame.display.set_icon(Icon)
 
 bg_image = pygame.image.load(
-    base_path + r"Hangbird_Game\sprites\green fields.png"
+    base_path + r"\sprites\green fields.png"
 )
 
 the_word, hidden_word = secret_word_generator()
@@ -50,7 +50,7 @@ class Player(pygame.sprite.Sprite):
         """Creates the player entity"""
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"Hangbird_Game\sprites\Hbird7.png"
+            base_path + r"\sprites\Hbird7.png"
         ).convert()
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         self.rect = self.surf.get_rect()
@@ -95,7 +95,7 @@ class Obstacle(pygame.sprite.Sprite):
         """Creates the obstacles"""
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"Hangbird_Game\sprites\obstacles\%s.png"
+            base_path + r"\sprites\obstacles\%s.png"
             % obstacle_position
         ).convert()
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)
@@ -172,10 +172,10 @@ class Letter(ColoredLetter):
     """
 
     wrong_letter_sound = pygame.mixer.Sound(
-        base_path + r"Hangbird_Game\music\wrong letter + collision.mp3"
+        base_path + r"\music\wrong letter + collision.mp3"
     )
     correct_letter_sound = pygame.mixer.Sound(
-        base_path + r"Hangbird_Game\music\correct letter + powerup.mp3"
+        base_path + r"\music\correct letter + powerup.mp3"
     )
     the_abc = [
         "A",
@@ -294,7 +294,7 @@ class Hangman(pygame.sprite.Sprite):
         """Creates the Hangman"""
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"Hangbird_Game\sprites\hangman phases\phase %s.png"
+            base_path + r"\sprites\hangman phases\phase %s.png"
             % Hangman.phase_num
         ).convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
@@ -427,7 +427,7 @@ class Powerup(pygame.sprite.Sprite):
     """
 
     powerup_sound = pygame.mixer.Sound(
-        base_path + r"Hangbird_Game\music\correct letter + powerup.mp3"
+        base_path + r"\music\correct letter + powerup.mp3"
     )
     powerup_center = (
         random.randint(SCREEN_WIDTH + 120, SCREEN_WIDTH + 230),
@@ -442,7 +442,7 @@ class Powerup(pygame.sprite.Sprite):
         """
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"Hangbird_Game\sprites\powerups\%s.png"
+            base_path + r"\sprites\powerups\%s.png"
             % powerup
         ).convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
@@ -560,7 +560,7 @@ class Heart(pygame.sprite.Sprite):
         """Creates the heart"""
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"Hangbird_Game\sprites\heart.png"
+            base_path + r"\sprites\heart.png"
         ).convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center=(Heart.heart_horizontal_ip, 40))
@@ -576,7 +576,7 @@ def restart(command):
     if command == "COLLISION":
         if game_on:
             collision_sound = pygame.mixer.Sound(
-                base_path + r"Hangbird_Game\music\wrong letter + collision.mp3"
+                base_path + r"\music\wrong letter + collision.mp3"
             )
             collision_sound.play()
         for obstacle in obstacles:
@@ -641,7 +641,7 @@ game_on, game_over_restart = (
 )
 
 pygame.mixer.music.load(
-    base_path + r"Hangbird_Game\music\background music.wav"
+    base_path + r"\music\background music.wav"
 )
 pygame.mixer.music.play(loops=-1)
 
