@@ -1,6 +1,10 @@
+import os
+
 import pygame
 from pygame.locals import RLEACCEL
 import random
+
+base_path = os.getcwd()[:os.getcwd().find("Hangbird")]
 
 
 def secret_word_generator():
@@ -12,7 +16,7 @@ def secret_word_generator():
     """
 
     with open(
-        r"c:\Users\ofir1\OneDrive\שולחן העבודה\Hangbird game\words.txt", "r"
+        base_path + r"Hangbird game\words.txt", "r"
     ) as words_file:
         words = words_file.read().replace("\n", ",").split(",")
     the_word = random.choice([list(word) for word in words])
@@ -37,7 +41,7 @@ class ColoredLetter(pygame.sprite.Sprite):
         """
         super().__init__()
         letter_file = (
-            r"c:\Users\ofir1\OneDrive\שולחן העבודה\Hangbird game\sprites\letters\%s.png"
+            base_path + r"Hangbird game\sprites\letters\%s.png"
             % letter
         )
         self.surf = pygame.image.load(letter_file).convert()
