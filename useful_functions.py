@@ -16,7 +16,7 @@ def secret_word_generator():
     """
 
     with open(
-        base_path + r"Hangbird game\words.txt", "r"
+        base_path + r"Hangbird_Game\words.txt", "r"
     ) as words_file:
         words = words_file.read().replace("\n", ",").split(",")
     the_word = random.choice([list(word) for word in words])
@@ -41,7 +41,7 @@ class ColoredLetter(pygame.sprite.Sprite):
         """
         super().__init__()
         letter_file = (
-            base_path + r"Hangbird game\sprites\letters\%s.png"
+            base_path + r"Hangbird_Game\sprites\letters\%s.png"
             % letter
         )
         self.surf = pygame.image.load(letter_file).convert()
