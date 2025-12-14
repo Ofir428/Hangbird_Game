@@ -1,0 +1,18 @@
+{
+    "event_type": "player_win",
+    "cause": "All letters guessed",
+    "game_length_seconds": 92.725,
+    "the_word": "WHO",
+    "current_hidden_word_state": [
+        "W",
+        "H",
+        "O"
+    ],
+    "wrong_letters_list": [
+        "E",
+        "I",
+        "Q"
+    ],
+    "hangman_phase": 2,
+    "active_hearts": 1
+}

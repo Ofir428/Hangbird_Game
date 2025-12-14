@@ -15,8 +15,9 @@ import random
 
 from useful_functions import *
 
+import json
 
-base_path = os.getcwd()
+BASE_PATH = os.getcwd()
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -24,12 +25,12 @@ game_display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 pygame.display.set_caption("Hangbird")
 Icon = pygame.image.load(
-    base_path + r"\sprites\hangman phases\phase 6.png"
+    BASE_PATH + r"\sprites\hangman phases\phase 6.png"
 )
 pygame.display.set_icon(Icon)
 
 bg_image = pygame.image.load(
-    base_path + r"\sprites\green fields.png"
+    BASE_PATH + r"\sprites\green fields.png"
 )
 
 the_word, hidden_word = secret_word_generator()
@@ -50,7 +51,7 @@ class Player(pygame.sprite.Sprite):
         """Creates the player entity"""
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"\sprites\Hbird7.png"
+            BASE_PATH + r"\sprites\Hbird7.png"
         ).convert()
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         self.rect = self.surf.get_rect()
@@ -95,7 +96,7 @@ class Obstacle(pygame.sprite.Sprite):
         """Creates the obstacles"""
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"\sprites\obstacles\%s.png"
+            BASE_PATH + r"\sprites\obstacles\%s.png"
             % obstacle_position
         ).convert()
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)
@@ -172,10 +173,10 @@ class Letter(ColoredLetter):
     """
 
     wrong_letter_sound = pygame.mixer.Sound(
-        base_path + r"\music\wrong letter + collision.mp3"
+        BASE_PATH + r"\music\wrong letter + collision.mp3"
     )
     correct_letter_sound = pygame.mixer.Sound(
-        base_path + r"\music\correct letter + powerup.mp3"
+        BASE_PATH + r"\music\correct letter + powerup.mp3"
     )
     the_abc = [
         "A",
@@ -294,7 +295,7 @@ class Hangman(pygame.sprite.Sprite):
         """Creates the Hangman"""
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"\sprites\hangman phases\phase %s.png"
+            BASE_PATH + r"\sprites\hangman phases\phase %s.png"
             % Hangman.phase_num
         ).convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
@@ -427,7 +428,7 @@ class Powerup(pygame.sprite.Sprite):
     """
 
     powerup_sound = pygame.mixer.Sound(
-        base_path + r"\music\correct letter + powerup.mp3"
+        BASE_PATH + r"\music\correct letter + powerup.mp3"
     )
     powerup_center = (
         random.randint(SCREEN_WIDTH + 120, SCREEN_WIDTH + 230),
@@ -442,7 +443,7 @@ class Powerup(pygame.sprite.Sprite):
         """
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"\sprites\powerups\%s.png"
+            BASE_PATH + r"\sprites\powerups\%s.png"
             % powerup
         ).convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
@@ -560,13 +561,44 @@ class Heart(pygame.sprite.Sprite):
         """Creates the heart"""
         super().__init__()
         self.surf = pygame.image.load(
-            base_path + r"\sprites\heart.png"
+            BASE_PATH + r"\sprites\heart.png"
         ).convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center=(Heart.heart_horizontal_ip, 40))
         Heart.heart_horizontal_ip -= 60
 
 
+def send_game_info():
+    """Saves the game information to a JSON file when the game ends."""
+    
+    index = 0
+    while os.path.exists("data\game_info%s.json" % (index)):
+        index += 1
+        
+    with open("data\game_info%s.json" % (index), "w") as file:
+        if hidden_word == the_word:
+            event_type = "player_win"
+            cause = "All letters guessed"
+        else:
+            event_type = "player_lose"
+            if Hangman.phase_num == 6:
+                cause = "Hangman completed"
+            elif Heart.active_hearts == 0:
+                cause = "No active hearts"
+        
+        game_info = {
+            "event_type": event_type,
+            "cause": cause,
+            "game_length_seconds": pygame.time.get_ticks() / 1000,
+            "the_word": "".join(the_word),
+            "current_hidden_word_state": hidden_word,
+            "wrong_letters_list": wrong_letters_list,
+            "hangman_phase": Hangman.phase_num,
+            "active_hearts": Heart.active_hearts
+            }
+        json.dump(game_info, file, indent=4)
+        
+        
 def restart(command):
     """Kills all objects except the player and game progress objects. Does additional things as per the command
 
@@ -576,7 +608,7 @@ def restart(command):
     if command == "COLLISION":
         if game_on:
             collision_sound = pygame.mixer.Sound(
-                base_path + r"\music\wrong letter + collision.mp3"
+                BASE_PATH + r"\music\wrong letter + collision.mp3"
             )
             collision_sound.play()
         for obstacle in obstacles:
@@ -641,7 +673,7 @@ game_on, game_over_restart = (
 )
 
 pygame.mixer.music.load(
-    base_path + r"\music\background music.wav"
+    BASE_PATH + r"\music\background music.wav"
 )
 pygame.mixer.music.play(loops=-1)
 
@@ -692,6 +724,7 @@ while running:
     pygame.display.update()
 
     if not (game_on) and game_over_restart:
+        send_game_info()
         restart("END GAME")
         EndGameMessage.update()
         game_over_restart = False

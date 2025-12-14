@@ -1,0 +1,19 @@
+{
+    "event_type": "player_lose",
+    "cause": "No active hearts",
+    "game_length_seconds": 47.04,
+    "the_word": "BOAT",
+    "current_hidden_word_state": [
+        "_",
+        "O",
+        "A",
+        "_"
+    ],
+    "wrong_letters_list": [
+        "U",
+        "D",
+        "H"
+    ],
+    "hangman_phase": 3,
+    "active_hearts": 0
+}

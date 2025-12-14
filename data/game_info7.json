@@ -1,0 +1,20 @@
+{
+    "event_type": "player_win",
+    "cause": "All letters guessed",
+    "game_length_seconds": 63.158,
+    "the_word": "FIX",
+    "current_hidden_word_state": [
+        "F",
+        "I",
+        "X"
+    ],
+    "wrong_letters_list": [
+        "U",
+        "O",
+        "A",
+        "T",
+        "Y"
+    ],
+    "hangman_phase": 5,
+    "active_hearts": 2
+}

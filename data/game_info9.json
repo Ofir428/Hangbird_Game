@@ -1,0 +1,23 @@
+{
+    "event_type": "player_lose",
+    "cause": "Hangman completed",
+    "game_length_seconds": 56.859,
+    "the_word": "LIFE",
+    "current_hidden_word_state": [
+        "_",
+        "I",
+        "_",
+        "E"
+    ],
+    "wrong_letters_list": [
+        "U",
+        "T",
+        "M",
+        "B",
+        "O",
+        "R",
+        "W"
+    ],
+    "hangman_phase": 6,
+    "active_hearts": 2
+}

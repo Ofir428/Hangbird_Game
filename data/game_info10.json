@@ -1,0 +1,20 @@
+{
+    "event_type": "player_win",
+    "cause": "All letters guessed",
+    "game_length_seconds": 78.127,
+    "the_word": "END",
+    "current_hidden_word_state": [
+        "E",
+        "N",
+        "D"
+    ],
+    "wrong_letters_list": [
+        "O",
+        "J",
+        "A",
+        "K",
+        "L"
+    ],
+    "hangman_phase": 5,
+    "active_hearts": 3
+}

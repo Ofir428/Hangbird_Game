@@ -1,0 +1,21 @@
+{
+    "event_type": "player_lose",
+    "cause": "Hangman completed",
+    "game_length_seconds": 69.344,
+    "the_word": "ASK",
+    "current_hidden_word_state": [
+        "A",
+        "_",
+        "_"
+    ],
+    "wrong_letters_list": [
+        "E",
+        "O",
+        "R",
+        "C",
+        "X",
+        "L"
+    ],
+    "hangman_phase": 6,
+    "active_hearts": 4
+}

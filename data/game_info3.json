@@ -1,0 +1,21 @@
+{
+    "event_type": "player_lose",
+    "cause": "No active hearts",
+    "game_length_seconds": 97.283,
+    "the_word": "HAND",
+    "current_hidden_word_state": [
+        "_",
+        "A",
+        "N",
+        "_"
+    ],
+    "wrong_letters_list": [
+        "I",
+        "Y",
+        "O",
+        "X",
+        "E"
+    ],
+    "hangman_phase": 4,
+    "active_hearts": 0
+}

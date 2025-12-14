@@ -1,0 +1,22 @@
+{
+    "event_type": "player_lose",
+    "cause": "Hangman completed",
+    "game_length_seconds": 80.689,
+    "the_word": "DESK",
+    "current_hidden_word_state": [
+        "_",
+        "E",
+        "_",
+        "_"
+    ],
+    "wrong_letters_list": [
+        "U",
+        "I",
+        "O",
+        "T",
+        "A",
+        "Y"
+    ],
+    "hangman_phase": 6,
+    "active_hearts": 2
+}
